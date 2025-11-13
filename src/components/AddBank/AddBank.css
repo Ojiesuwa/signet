@@ -1,0 +1,123 @@
+.add__bank {
+  width: 280px;
+  height: calc(100% - 50px);
+  position: fixed;
+  z-index: 400;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 15px 10px;
+  padding-top: 30px;
+  overflow: hidden;
+}
+
+.add__bank .topbar {
+  width: 100%;
+  gap: 15px;
+  padding: 10px 10px 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add__bank .main__wrapper {
+  width: 100%;
+  height: fit-content;
+  /* margin-top: 20px; */
+  flex-shrink: 0;
+}
+
+.add__bank .main__wrapper .input__wrapper {
+  margin-top: 8px;
+}
+
+.add__bank .main__wrapper .input__wrapper label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.add__bank .main__wrapper .input__wrapper label {
+  margin-bottom: 6px;
+}
+
+.add__bank .select__bank {
+  height: 45px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  width: 100%;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  border-radius: 10px;
+  padding: 0 15px;
+  font-size: 12px;
+}
+
+.add__bank .banks__wrapper {
+  margin-top: 15px;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.add__bank .banks__wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.add__bank .bank__item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 55px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 10px;
+}
+
+.add__bank .bank__item:not(:first-child) {
+  border-top: none;
+}
+
+.add__bank .bank__item span {
+  font-size: 16px;
+  opacity: 0.7;
+}
+.add__bank .bank__item p {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.add__bank button {
+  flex-shrink: 0;
+  margin-bottom: 10px;
+}
+
+.add__bank button {
+  flex-shrink: 0;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ccc;
+  color: #fff;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  cursor: not-allowed;
+}
+
+.add__bank button.active {
+  background-color: #0aa83f;
+  cursor: pointer;
+}
+
+.add__bank .bank__item.selected {
+  background-color: rgba(0, 168, 63, 0.1);
+  border-left: 3px solid #0aa83f;
+}

@@ -1,0 +1,21 @@
+.App {
+  /* width: 100%; */
+  min-width: 291px;
+  height: calc(100% - 28px);
+  aspect-ratio: 30 / 59;
+  background-color: #fff;
+  position: relative;
+  border-radius: 60px;
+  overflow: hidden;
+  padding: 0 10px;
+}
+
+.App .device__frame {
+  height: 100%;
+  position: fixed;
+  left: 50%;
+  top: 0%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 500;
+}

@@ -1,0 +1,132 @@
+@import url("/src//css/animation.css");
+
+:root {
+  --background: #313131;
+  --text: #000;
+
+  --accent: #d61717;
+  --accent-faded: #d617171f;
+  --accent-dark: #7e0e0e;
+  --accent-light: #d1b5ff;
+  --accent-dark-main: #2f0871;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", "Montserrat", "Nunito Sans", sans-serif;
+  transition: 0.3s ease;
+  color: var(--text);
+}
+
+body {
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  background-color: var(--background);
+  display: flex;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+p,
+li,
+a,
+label {
+  font-size: 14px;
+}
+
+svg {
+  width: 20px;
+  height: 20px;
+}
+
+button {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to right, var(--accent), var(--accent-dark));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border: 0;
+  outline: 0;
+  color: #fff;
+}
+
+button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+button i {
+  color: #fff;
+}
+button svg {
+  width: 20px;
+  height: 20px;
+}
+
+button:hover {
+  transform: scaleY(0.9);
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scaleY(0.2);
+  opacity: 0.4;
+}
+
+input {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  height: 45px;
+  outline: 0;
+  padding: 0 10px;
+  width: 100%;
+  border-radius: 10px;
+}
+textarea {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  height: fit-content;
+  min-height: 100px;
+  outline: 0;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+select {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  height: 45px;
+  outline: 0;
+  padding: 0 10px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+option {
+  background-color: var(--background);
+}
