@@ -1,17 +1,55 @@
 // import React, { useState } from "react";
+import type { TransactionType } from "../../pages/Scanning/Scanning";
 import "./Status.css";
+import banks from "../../banks.json";
 
 export default function Status({
   status,
   onHide,
   amount,
+  transaction,
 }: {
   status: "good" | "warning" | "critical";
   onHide: any;
   amount: number;
+  transaction: TransactionType;
 }) {
   function formatNaira(amount: number): string {
     return `₦${amount.toLocaleString("en-NG")}`;
+  }
+
+  function formatIso(iso: string): string {
+    const date = new Date(iso);
+
+    // --- Time ---
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12 || 12; // convert 0 → 12
+    const timeStr = `${hours.toString().padStart(2, "0")}:${minutes}${ampm}`;
+
+    // --- Date ---
+    const day = date.getDate();
+    const month = date.toLocaleString("en-US", { month: "long" });
+    const year = date.getFullYear();
+
+    // add ordinal suffix
+    const suffix =
+      day % 10 === 1 && day !== 11
+        ? "st"
+        : day % 10 === 2 && day !== 12
+        ? "nd"
+        : day % 10 === 3 && day !== 13
+        ? "rd"
+        : "th";
+
+    const dateStr = `${day}${suffix} ${month} ${year}`;
+
+    return `${timeStr}, ${dateStr}`;
+  }
+
+  function getBankName(bankCode: string) {
+    return banks.data.find((data) => data.code === bankCode)?.name;
   }
   return (
     <div
@@ -49,55 +87,82 @@ export default function Status({
 
         {/* <i className="fa-solid fa-check"></i> */}
       </div>
-      <p className="amount">{formatNaira(amount)}</p>
-      <div className="info__wrapper">
-        <div className="info__item">
-          <i
-            className={
-              "fa-light " +
-              (status === "critical" ? "fa-circle-xmark" : "fa-circle-check")
-            }
-            style={{
-              color:
-                status === "good"
-                  ? "rgba(15, 162, 15, 1)"
-                  : status === "warning"
-                  ? "rgba(173, 138, 14, 1)"
-                  : "rgba(153, 13, 13, 1)",
-            }}
-          ></i>
-          {status === "critical" ? (
-            <p className="bold" style={{ color: "rgba(153, 13, 13, 1)" }}>
-              Document has been tampered with
-            </p>
-          ) : (
-            <p>Document is valid and authentic</p>
-          )}
-        </div>
-        <div className="info__item">
-          <i
-            className={
-              "fa-light " +
-              (status === "warning" ? "fa-circle-xmark" : "fa-circle-check")
-            }
-            style={{
-              color:
-                status === "good"
-                  ? "rgba(15, 162, 15, 1)"
-                  : status === "warning"
-                  ? "rgba(173, 138, 14, 1)"
-                  : "rgba(153, 13, 13, 1)",
-            }}
-          ></i>
-          {status === "warning" ? (
-            <p className="bold" style={{ color: "rgba(200, 167, 5, 1)" }}>
-              Transfer wasn't done to you
-            </p>
-          ) : (
-            <p>Transfer was done to your account</p>
-          )}
-        </div>
-      </div>
+      {status !== "critical" ? (
+        <>
+          {" "}
+          <p className="amount">{formatNaira(transaction.amount)}</p>
+          <div className="date__wrapper">
+            <p>{formatIso(transaction.timestamp)}</p>
+          </div>
+          <div className="info__wrapper">
+            <div className="info__item">
+              <label
+                htmlFor=""
+                style={{
+                  color:
+                    status === "good"
+                      ? "rgba(17, 144, 17, 1)"
+                      : status === "warning"
+                      ? "rgba(227, 178, 0, 1)"
+                      : "rgba(215, 0, 0, 1)",
+                }}
+              >
+                Sent to
+              </label>
+              <p className="acc__number">{transaction.receiverAccountNumber}</p>
+              <p className="rec__name">{transaction.receiverName}</p>
+              <p className="bank__name">
+                {getBankName(transaction.receiverBankCode)}
+              </p>
+              <div
+                className="your__account"
+                style={{
+                  color:
+                    status === "good"
+                      ? "rgba(17, 144, 17, 1)"
+                      : status === "warning"
+                      ? "rgba(227, 178, 0, 1)"
+                      : "rgba(215, 0, 0, 1)",
+                }}
+              >
+                {status === "good"
+                  ? "(Money was sent to you)"
+                  : "(Money sent to someone else)"}
+              </div>
+            </div>
+            <div className="info__item">
+              <label
+                htmlFor=""
+                style={{
+                  color:
+                    status === "good"
+                      ? "rgba(17, 144, 17, 1)"
+                      : status === "warning"
+                      ? "rgba(227, 178, 0, 1)"
+                      : "rgba(215, 0, 0, 1)",
+                }}
+              >
+                Sent from
+              </label>
+              <p className="acc__number">{transaction.senderAccountNumber}</p>
+              <p className="rec__name">{transaction.senderName}</p>
+              <p className="bank__name">
+                {getBankName(transaction.senderBankCode)}
+              </p>
+            </div>
+          </div>
+          <div className="transaction__reference">
+            <p>Ref: {transaction.transactionReference}</p>
+          </div>
+        </>
+      ) : (
+        <p className="cr">
+          <b>BEWARE</b>
+          <br />
+          This is an invalid Document
+          <br /> Beware of this receipt
+        </p>
+      )}
     </div>
   );
 }

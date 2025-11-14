@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow: hidden;
 }
 
 .scanning .header {
@@ -37,4 +38,34 @@
 .scanning .main {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scanning .main button {
+  flex-shrink: 0;
+}
+
+/* .camera__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+} */
+
+.scanning .camera__view {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.camera__feed {
+  width: 100%;
+  height: 100%;
+  /* box-shadow: 0 0 20px rgba(0, 255, 128, 0.3); */
+  object-fit: cover;
 }
